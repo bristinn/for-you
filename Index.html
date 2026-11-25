@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Garden for Saneeta 🌸</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #ffe4ed, #fff6fa, #f4e4ff);
+    color: #914365;
+    overflow-x: hidden;
+    padding: 20px 12px;
+}
+
+/* BACKGROUND */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-heart {
+    position: absolute;
+    bottom: -60px;
+    color: #e99ab9;
+    opacity: 0.45;
+    animation: heartFloat linear infinite;
+}
+
+@keyframes heartFloat {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: 0.5; }
+    100% {
+        transform: translateY(-115vh) rotate(35deg);
+        opacity: 0;
+    }
+}
+
+.sparkle {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.7);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* FLOWERS */
+
+.flowers {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.flower {
+    position: absolute;
+    font-size: 30px;
+    animation: flowerSway 5s ease-in-out infinite;
+}
+
+.flower:nth-child(1) { top: 5%; left: 5%; }
+.flower:nth-child(2) { top: 12%; right: 7%; }
+.flower:nth-child(3) { bottom: 10%; left: 7%; }
+.flower:nth-child(4) { bottom: 15%; right: 6%; }
+.flower:nth-child(5) { top: 45%; left: 2%; }
+.flower:nth-child(6) { top: 55%; right: 2%; }
+
+@keyframes flowerSway {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-15px) rotate(8deg); }
+}
+
+/* OPENING */
+
+#opening {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: linear-gradient(135deg, #ffe4ed, #fff6fa, #f4e4ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+
+.opening-content {
+    max-width: 350px;
+    animation: appear 2s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.opening-heart {
+    font-size: 65px;
+    animation: heartBeat 2s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.12); }
+}
+
+#opening h1 {
+    font-size: 30px;
+    color: #c05b89;
+    margin: 18px 0;
+    line-height: 1.4;
+}
+
+#opening p {
+    line-height: 1.8;
+    color: #a56a85;
+    font-size: 16px;
+}
+
+.open-button {
+    margin-top: 25px;
+    padding: 14px 28px;
+    border: 1px solid #f5b8d0;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #e88bb2, #d98bc9);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 6px 25px #e88bb255;
+    animation: buttonGlow 3s ease-in-out infinite;
+}
+
+@keyframes buttonGlow {
+    0%, 100% { box-shadow: 0 6px 20px #e88bb255; }
+    50% { box-shadow: 0 6px 35px #e88bb299; }
+}
+
+#opening.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* MAIN CARD */
+
+#garden {
+    display: none;
+    position: relative;
+    z-index: 2;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 28px 20px;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 30px;
+    box-shadow: 0 20px 50px #d99bb855;
+    text-align: center;
+    animation: appear 1.5s ease;
+}
+
+#garden h1 {
+    color: #c05b89;
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #b17b94;
+}
+
+/* GROWING GARDEN */
+
+.garden-area {
+    min-height: 65px;
+    padding: 10px;
+    margin-bottom: 18px;
+    background: #fff8fb;
+    border-radius: 18px;
+    border: 1px dashed #f2bfd4;
+}
+
+.garden-title {
+    font-size: 12px;
+    color: #b17b94;
+    margin-bottom: 8px;
+}
+
+#bouquet {
+    font-size: 25px;
+    letter-spacing: 4px;
+    line-height: 1.5;
+    min-height: 32px;
+}
+
+/* QUESTIONS */
+
+.question {
+    background: rgba(255, 240, 246, 0.9);
+    border: 1px solid #ffe0ec;
+    border-radius: 17px;
+    padding: 14px 10px;
+    margin: 12px 0;
+    transition: transform 0.3s ease;
+}
+
+.question:hover {
+    transform: translateY(-3px);
+}
+
+.question p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.answer-btn {
+    border: none;
+    border-radius: 25px;
+    padding: 9px 18px;
+    font-size: 15px;
+    cursor: pointer;
+    background: white;
+    color: #a35a7d;
+    box-shadow: 0 3px 10px #e7a7c455;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.answer-btn:active {
+    transform: scale(0.92);
+}
+
+.answer-btn.selected {
+    background: #ffd2e4;
+    outline: 2px solid #e88bb2;
+}
+
+.response {
+    font-size: 13px;
+    margin-top: 10px;
+    color: #c05b89;
+    line-height: 1.5;
+    min-height: 18px;
+}
+
+/* FINAL MESSAGE */
+
+#finalMessage {
+    display: none;
+    margin-top: 22px;
+    padding: 18px 10px;
+    line-height: 1.8;
+    color: #b64f7d;
+    font-size: 17px;
+    background: #fff4f8;
+    border-radius: 20px;
+    animation: appear 1s ease;
+}
+
+#finalMessage button {
+    margin-top: 12px;
+    background: linear-gradient(135deg, #e88bb2, #d98bc9);
+    color: white;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 22px;
+}
+
+/* EMOJI ANIMATIONS */
+
+.burst {
+    position: fixed;
+    bottom: -40px;
+    pointer-events: none;
+    z-index: 30;
+    animation: burstRise 3.5s ease-out forwards;
+}
+
+@keyframes burstRise {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.7);
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg) scale(1);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background" id="background"></div>
+
+<div class="flowers">
+    <span class="flower">🌸</span>
+    <span class="flower">🌷</span>
+    <span class="flower">🌹</span>
+    <span class="flower">🌺</span>
+    <span class="flower">💐</span>
+    <span class="flower">🌼</span>
+</div>
+
+<!-- OPENING PAGE -->
+
+<div id="opening">
+    <div class="opening-content">
+
+        <div class="opening-heart">💗</div>
+
+        <h1>A Little Garden<br>For You, Saneeta</h1>
+
+        <p>
+            A tiny place filled with flowers,<br>
+            gentle wishes, and a little care.
+        </p>
+
+        <button class="open-button" onclick="openGarden()">
+            Open Your Little Garden 🌷
+        </button>
+
+        <p style="margin-top:20px;">🌸 ✨ 🌸</p>
+
+    </div>
+</div>
+
+<!-- MAIN GARDEN -->
+
+<div id="garden">
+
+    <h1>Hey, Saneeta 🌷</h1>
+
+    <p class="subtitle">
+        A little check-in, wrapped in flowers ♡
+    </p>
+
+    <div class="garden-area">
+        <div class="garden-title">YOUR LITTLE GARDEN GROWS 🌱</div>
+        <div id="bouquet">🌱</div>
+    </div>
+
+    <div class="question" data-id="food">
+        <p>🍓 Did you eat something?</p>
+        <div class="buttons">
+            <button class="answer-btn" onclick="answer(this, true)">😊 Yes</button>
+            <button class="answer-btn" onclick="answer(this, false)">😔 Not yet</button>
+        </div>
+        <div class="response"></div>
+    </div>
+
+    <div class="question" data-id="medicine">
+        <p>💊 Did you take your medicine, if prescribed?</p>
+        <div class="buttons">
+            <button class="answer-btn" onclick="answer(this, true)">😊 Yes</button>
+            <button class="answer-btn" onclick="answer(this, false)">😔 Not yet</button>
+        </div>
+        <div class="response"></div>
+    </div>
+
+    <div class="question" data-id="water">
+        <p>💧 Did you drink enough water?</p>
+        <div class="buttons">
+            <button class="answer-btn" onclick="answer(this, true)">😊 Yes</button>
+            <button class="answer-btn" onclick="answer(this, false)">😔 Not yet</button>
+        </div>
+        <div class="response"></div>
+    </div>
+
+    <div class="question" data-id="pain">
+        <p>🦷 Has your tooth pain reduced?</p>
+        <div class="buttons">
+            <button class="answer-btn" onclick="answer(this, true)">😊 Yes</button>
+            <button class="answer-btn" onclick="answer(this, false)">😔 Not yet</button>
+        </div>
+        <div class="response"></div>
+    </div>
+
+    <div class="question" data-id="day">
+        <p>🌸 Was your day good?</p>
+        <div class="buttons">
+            <button class="answer-btn" onclick="answer(this, true)">😊 Yes</button>
+            <button class="answer-btn" onclick="answer(this, false)">😔 Not really</button>
+        </div>
+        <div class="response"></div>
+    </div>
+
+    <div id="finalMessage">
+        Whatever your answers are,
+        <br>
+        you deserve a little kindness,
+        <br>
+        a peaceful evening,
+        <br>
+        and a smile that comes naturally. 💗
+        <br><br>
+        Take care of yourself 🌷
+
+        <br>
+        <button class="answer-btn" onclick="celebrate()">
+            A Little More Happiness ✨
+        </button>
+    </div>
+
+    <div class="footer">🌷 ♡ 🌸 ♡ 🌷</div>
+
+</div>
+
+<script>
+
+/* Background hearts */
+
+const background = document.getElementById("background");
+const heartSymbols = ["♡", "♥", "💕", "💗", "🌸"];
+
+for (let i = 0; i < 22; i++) {
+    const heart = document.createElement("span");
+    heart.className = "bg-heart";
+    heart.textContent = heartSymbols[
+        Math.floor(Math.random() * heartSymbols.length)
+    ];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (8 + Math.random() * 12) + "s";
+    heart.style.animationDelay = (Math.random() * 15) + "s";
+    heart.style.fontSize = (18 + Math.random() * 25) + "px";
+
+    background.appendChild(heart);
+}
+
+/* Twinkling stars */
+
+for (let i = 0; i < 18; i++) {
+    const star = document.createElement("span");
+    star.className = "sparkle";
+    star.textContent = "✦";
+
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.animationDelay = Math.random() * 4 + "s";
+
+    background.appendChild(star);
+}
+
+/* Opening screen */
+
+function openGarden() {
+    document.getElementById("opening").classList.add("hide");
+
+    setTimeout(() => {
+        document.getElementById("opening").style.display = "none";
+        document.getElementById("garden").style.display = "block";
+        window.scrollTo(0, 0);
+        floatEmojis(["🌸", "💗", "🌷", "✨"]);
+    }, 1200);
+}
+
+/* Messages for each answer */
+
+const messages = {
+    food: {
+        yes: "Yay! A little nourishment for your lovely self 🍓",
+        no: "Please try to have something to eat when you can. Your body deserves care too. 🍓"
+    },
+
+    medicine: {
+        yes: "Hope you're feeling a little better. Take care 💗",
+        no: "If your medicine was prescribed for today, try to follow the instructions you were given. 🌷"
+    },
+
+    water: {
+        yes: "Hydration check passed! Keep that little glow ✨",
+        no: "A little sip of water might be a lovely start. Stay hydrated 💧"
+    },
+
+    pain: {
+        yes: "That's lovely news! Hope the relief continues 🌸",
+        no: "I'm sorry it's still hurting. Hope you get relief soon. If it continues or worsens, please tell someone you trust and contact a dentist. 💗"
+    },
+
+    day: {
+        yes: "A good day deserves a little celebration 🌼",
+        no: "Some days are simply heavy. I hope the rest of your evening feels gentler. 🌙"
+    }
+};
+
+/* Answer selection */
+
+const answered = new Set();
+const flowers = ["🌸", "🌷", "🌼", "🌺", "💐"];
+
+function answer(button, happy) {
+    const question = button.closest(".question");
+    const id = question.dataset.id;
+    const buttons = question.querySelectorAll(".answer-btn");
+    const response = question.querySelector(".response");
+
+    buttons.forEach(b => b.classList.remove("selected"));
+    button.classList.add("selected");
+
+    response.textContent = happy
+        ? messages[id].yes
+        : messages[id].no;
+
+    answered.add(id);
+
+    // Grow a flower for every answered question
+    updateGarden();
+
+    // Different animations for happy and not-yet answers
+    if (happy) {
+        floatEmojis(["🌸", "💗", "🌷", "💕", "😊", "✨", "🌺"]);
+    } else {
+        floatEmojis(["🥺", "🌧️", "💗", "🌷", "🫂"]);
+    }
+
+    document.getElementById("finalMessage").style.display = "block";
+}
+
+/* Growing flower garden */
+
+function updateGarden() {
+    const bouquet = document.getElementById("bouquet");
+    let display = "";
+
+    for (let i = 0; i < answered.size; i++) {
+        display += flowers[i % flowers.length];
+    }
+
+    bouquet.textContent = display || "🌱";
+
+    if (answered.size === 5) {
+        bouquet.textContent += " ✨";
+    }
+}
+
+/* Final celebration */
+
+function celebrate() {
+    floatEmojis([
+        "🌸", "💗", "🌷", "💕",
+        "😊", "✨", "🌺", "💖",
+        "🌼", "🪷", "♡"
+    ]);
+}
+
+/* Floating emojis */
+
+function floatEmojis(emojis) {
+    for (let i = 0; i < 18; i++) {
+        const emoji = document.createElement("div");
+        emoji.className = "burst";
+
+        emoji.textContent = emojis[
+            Math.floor(Math.random() * emojis.length)
+        ];
+
+        emoji.style.left = Math.random() * 100 + "vw";
+        emoji.style.animationDuration = (2.5 + Math.random() * 2) + "s";
+        emoji.style.fontSize = (20 + Math.random() * 25) + "px";
+
+        document.body.appendChild(emoji);
+
+        setTimeout(() => emoji.remove(), 5000);
+    }
+}
+
+</script>
+
+</body>
+</html>
